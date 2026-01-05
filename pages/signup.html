@@ -132,6 +132,7 @@
     </div>
   </footer>
 
+  <script src="../js/api.js"></script>
   <script src="../js/main.js"></script>
   <script>
     // Password strength indicator
@@ -204,13 +205,7 @@
       }
 
       try {
-        // Simulate API call
-        const response = await apiCall('/api/register', 'POST', {
-          username: username,
-          email: email,
-          password: password
-        });
-
+        const response = await api.register(username, email, password, confirmPassword);
         showAlert('Account created successfully! Redirecting to login...', 'success');
         setTimeout(() => {
           window.location.href = '/pages/login.html';

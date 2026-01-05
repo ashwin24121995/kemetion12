@@ -116,6 +116,7 @@
     </div>
   </footer>
 
+  <script src="../js/api.js"></script>
   <script src="../js/main.js"></script>
   <script>
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
@@ -124,7 +125,6 @@
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      // Validation
       if (!validateEmail(email)) {
         showAlert('Please enter a valid email address', 'error');
         return;
@@ -136,19 +136,10 @@
       }
 
       try {
-        // Simulate API call
-        const response = await apiCall('/api/login', 'POST', {
-          email: email,
-          password: password
-        });
-
-        // Store token and user data
-        setToken(response.token);
-        setUserData(response.user);
-
+        const response = await api.login(email, password);
         showAlert('Login successful! Redirecting...', 'success');
         setTimeout(() => {
-          redirectToHome();
+          window.location.href = '/pages/profile.html';
         }, 1500);
       } catch (error) {
         showAlert(error.message || 'Login failed. Please try again.', 'error');
