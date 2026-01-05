@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "KEMETION Fantasy Cricket Platform - Backend API",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
@@ -27,6 +26,7 @@
     "body-parser": "^1.20.2"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   }
 }
