@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - KEMETION Fantasy Cricket</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        🏏 KEMETION
+      </a>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/how-to-play.html">How to Play</a>
+        <a href="/pages/about.html">About</a>
+        <a href="/pages/contact.html">Contact</a>
+      </nav>
+      <div class="nav-buttons">
+        <a href="/pages/login.html" class="btn-login">Login</a>
+        <a href="/pages/signup.html" class="btn-signup">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ALERT CONTAINER -->
+  <div id="alert-container" style="position: fixed; top: 80px; right: 20px; z-index: 999; max-width: 400px;"></div>
+
+  <!-- SIGNUP SECTION -->
+  <section style="min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, var(--light-gray) 0%, white 100%); padding: 40px 20px;">
+    <div class="container" style="max-width: 400px; margin: 0 auto;">
+      <div class="card">
+        <div class="card-header">
+          <h1 style="font-size: 28px; color: var(--primary-blue);">Create Account</h1>
+          <p style="color: var(--text-light); margin-top: 10px;">Join KEMETION and start playing fantasy cricket</p>
+        </div>
+
+        <div class="card-body">
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" placeholder="Choose a username" required>
+              <small style="color: var(--text-light); display: block; margin-top: 5px;">3-20 characters, letters and numbers only</small>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+              <div id="passwordStrength" style="margin-top: 8px; font-size: 12px;"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+
+            <div class="checkbox-group" style="margin-top: 20px;">
+              <input type="checkbox" id="terms" name="terms" required>
+              <label for="terms" style="margin: 0; font-weight: 400;">I agree to the <a href="/pages/terms.html" style="color: var(--primary-orange); text-decoration: none;">Terms & Conditions</a></label>
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="privacy" name="privacy" required>
+              <label for="privacy" style="margin: 0; font-weight: 400;">I have read the <a href="/pages/privacy.html" style="color: var(--primary-orange); text-decoration: none;">Privacy Policy</a></label>
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="age" name="age" required>
+              <label for="age" style="margin: 0; font-weight: 400;">I confirm I am 18 years or older</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full" style="padding: 12px; margin-top: 20px;">
+              Create Account
+            </button>
+          </form>
+
+          <div style="text-align: center; margin-top: 20px;">
+            <p style="color: var(--text-light);">Already have an account? 
+              <a href="/pages/login.html" style="color: var(--primary-orange); text-decoration: none; font-weight: 600;">Sign in here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPLIANCE INFO -->
+      <div style="text-align: center; margin-top: 30px; color: var(--text-light); font-size: 12px;">
+        <p><strong>100% FREE Platform</strong> | No Real Money Required | Skill-Based Gaming</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>KEMETION</h3>
+        <p style="opacity: 0.8;">100% Free Fantasy Cricket Platform</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="/pages/how-to-play.html">How to Play</a>
+        <a href="/pages/about.html">About Us</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/faq.html">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <a href="/pages/terms.html">Terms & Conditions</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/responsible-gaming.html">Responsible Gaming</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p style="opacity: 0.8;">Email: support@kemetionplay.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 KEMETION PRIVATE LIMITED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Password strength indicator
+    document.getElementById('password').addEventListener('input', function() {
+      const password = this.value;
+      const strengthDiv = document.getElementById('passwordStrength');
+      let strength = 'Weak';
+      let color = '#e74c3c';
+
+      if (password.length >= 8) {
+        if (/[A-Z]/.test(password) && /[0-9]/.test(password)) {
+          strength = 'Strong';
+          color = '#27ae60';
+        } else if (/[A-Z]/.test(password) || /[0-9]/.test(password)) {
+          strength = 'Medium';
+          color = '#f39c12';
+        }
+      }
+
+      strengthDiv.innerHTML = `<span style="color: ${color};">Password Strength: ${strength}</span>`;
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Validation
+      if (username.length < 3 || username.length > 20) {
+        showAlert('Username must be 3-20 characters', 'error');
+        return;
+      }
+
+      if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+        showAlert('Username can only contain letters, numbers, and underscores', 'error');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        showAlert('Please enter a valid email address', 'error');
+        return;
+      }
+
+      if (!validatePassword(password)) {
+        showAlert('Password must be at least 6 characters', 'error');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showAlert('Passwords do not match', 'error');
+        return;
+      }
+
+      if (!document.getElementById('terms').checked) {
+        showAlert('You must agree to the Terms & Conditions', 'error');
+        return;
+      }
+
+      if (!document.getElementById('privacy').checked) {
+        showAlert('You must agree to the Privacy Policy', 'error');
+        return;
+      }
+
+      if (!document.getElementById('age').checked) {
+        showAlert('You must confirm you are 18 years or older', 'error');
+        return;
+      }
+
+      try {
+        // Simulate API call
+        const response = await apiCall('/api/register', 'POST', {
+          username: username,
+          email: email,
+          password: password
+        });
+
+        showAlert('Account created successfully! Redirecting to login...', 'success');
+        setTimeout(() => {
+          window.location.href = '/pages/login.html';
+        }, 1500);
+      } catch (error) {
+        showAlert(error.message || 'Registration failed. Please try again.', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

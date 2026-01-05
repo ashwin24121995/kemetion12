@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Team - KEMETION Fantasy Cricket</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .player-card {
+      background: white;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .player-card:hover {
+      border-color: var(--primary-orange);
+      box-shadow: 0 5px 15px rgba(255, 107, 53, 0.2);
+    }
+
+    .player-card.selected {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+      color: white;
+      border-color: var(--primary-orange);
+    }
+
+    .player-name {
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .player-role {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-bottom: 8px;
+    }
+
+    .player-credit {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-orange);
+    }
+
+    .team-summary {
+      background: var(--light-gray);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .role-filter {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .role-filter button {
+      padding: 8px 16px;
+      border: 1px solid var(--border-color);
+      background: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .role-filter button.active {
+      background: var(--primary-orange);
+      color: white;
+      border-color: var(--primary-orange);
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        🏏 KEMETION
+      </a>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/contests.html">Contests</a>
+        <a href="/pages/leaderboard.html">Leaderboard</a>
+        <a href="/pages/how-to-play.html">How to Play</a>
+      </nav>
+      <div class="nav-buttons"></div>
+    </div>
+  </header>
+
+  <!-- ALERT CONTAINER -->
+  <div id="alert-container" style="position: fixed; top: 80px; right: 20px; z-index: 999; max-width: 400px;"></div>
+
+  <!-- MAIN CONTENT -->
+  <section style="padding: 40px 20px; background: var(--light-gray); min-height: 100vh;">
+    <div class="container" style="max-width: 1200px;">
+      <!-- MATCH INFO -->
+      <div class="card" style="margin-bottom: 30px;">
+        <div class="card-header">
+          <h1 style="color: var(--primary-blue); font-size: 24px;">Create Your Team</h1>
+        </div>
+        <div class="card-body">
+          <div class="flex-between" style="flex-wrap: wrap; gap: 20px;">
+            <div>
+              <h2 id="matchTitle" style="font-size: 20px; color: var(--primary-blue); margin-bottom: 10px;">Match Details</h2>
+              <p id="matchInfo" style="color: var(--text-light);">Loading match information...</p>
+            </div>
+            <div style="text-align: right;">
+              <p style="color: var(--text-light); margin-bottom: 5px;">Players Selected</p>
+              <p style="font-size: 24px; font-weight: 700; color: var(--primary-orange);">
+                <span id="selectedCount">0</span>/11
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEAM SUMMARY -->
+      <div class="team-summary">
+        <h3 style="color: var(--primary-blue); margin-bottom: 15px;">Team Summary</h3>
+        <div class="summary-item">
+          <span>Team Name:</span>
+          <input type="text" id="teamName" placeholder="Enter team name" style="width: 200px; padding: 8px; border: 1px solid var(--border-color); border-radius: 5px;">
+        </div>
+        <div class="summary-item">
+          <span>Captain:</span>
+          <span id="captainDisplay" style="color: var(--primary-orange); font-weight: 600;">Not selected</span>
+        </div>
+        <div class="summary-item">
+          <span>Vice-Captain:</span>
+          <span id="viceCaptainDisplay" style="color: var(--primary-orange); font-weight: 600;">Not selected</span>
+        </div>
+        <div class="summary-item" style="border-bottom: 2px solid var(--primary-blue); padding-top: 15px; padding-bottom: 15px;">
+          <span style="font-weight: 700;">Total Players:</span>
+          <span style="font-size: 18px; font-weight: 700; color: var(--primary-blue);">
+            <span id="totalPlayers">0</span>/11
+          </span>
+        </div>
+      </div>
+
+      <!-- ROLE FILTER -->
+      <div style="margin-bottom: 30px;">
+        <h3 style="color: var(--primary-blue); margin-bottom: 15px;">Filter by Role</h3>
+        <div class="role-filter">
+          <button class="active" onclick="filterByRole('all')">All Players</button>
+          <button onclick="filterByRole('batsman')">Batsmen</button>
+          <button onclick="filterByRole('bowler')">Bowlers</button>
+          <button onclick="filterByRole('all-rounder')">All-rounders</button>
+          <button onclick="filterByRole('wicket-keeper')">Wicket-keepers</button>
+        </div>
+      </div>
+
+      <!-- PLAYERS GRID -->
+      <div id="playersContainer" class="grid grid-4" style="margin-bottom: 40px;">
+        <div class="spinner" style="grid-column: 1 / -1;"></div>
+      </div>
+
+      <!-- SUBMIT BUTTON -->
+      <div style="text-align: center; margin-bottom: 40px;">
+        <button onclick="submitTeam()" class="btn btn-primary btn-large" style="margin-right: 10px;">
+          Create Team
+        </button>
+        <a href="/" class="btn btn-secondary btn-large">Cancel</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>KEMETION</h3>
+        <p style="opacity: 0.8;">100% Free Fantasy Cricket Platform</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="/pages/how-to-play.html">How to Play</a>
+        <a href="/pages/about.html">About Us</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/faq.html">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <a href="/pages/terms.html">Terms & Conditions</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/responsible-gaming.html">Responsible Gaming</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p style="opacity: 0.8;">Email: support@kemetionplay.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 KEMETION PRIVATE LIMITED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Sample players data
+    const allPlayers = [
+      { id: 1, name: 'Virat Kohli', role: 'batsman', team: 'India', credits: 10 },
+      { id: 2, name: 'Rohit Sharma', role: 'batsman', team: 'India', credits: 9 },
+      { id: 3, name: 'MS Dhoni', role: 'wicket-keeper', team: 'India', credits: 8 },
+      { id: 4, name: 'Jasprit Bumrah', role: 'bowler', team: 'India', credits: 9 },
+      { id: 5, name: 'Ravindra Jadeja', role: 'all-rounder', team: 'India', credits: 8 },
+      { id: 6, name: 'Hardik Pandya', role: 'all-rounder', team: 'India', credits: 8 },
+      { id: 7, name: 'Steve Smith', role: 'batsman', team: 'Australia', credits: 9 },
+      { id: 8, name: 'David Warner', role: 'batsman', team: 'Australia', credits: 8 },
+      { id: 9, name: 'Pat Cummins', role: 'bowler', team: 'Australia', credits: 8 },
+      { id: 10, name: 'Mitchell Starc', role: 'bowler', team: 'Australia', credits: 8 },
+      { id: 11, name: 'Glenn Maxwell', role: 'all-rounder', team: 'Australia', credits: 7 },
+      { id: 12, name: 'Alex Carey', role: 'wicket-keeper', team: 'Australia', credits: 7 },
+      { id: 13, name: 'Babar Azam', role: 'batsman', team: 'Pakistan', credits: 9 },
+      { id: 14, name: 'Shaheen Afridi', role: 'bowler', team: 'Pakistan', credits: 8 },
+      { id: 15, name: 'Fakhar Zaman', role: 'batsman', team: 'Pakistan', credits: 7 }
+    ];
+
+    let selectedPlayers = [];
+    let captain = null;
+    let viceCaptain = null;
+    let currentFilter = 'all';
+
+    function displayPlayers(players = allPlayers) {
+      const container = document.getElementById('playersContainer');
+      
+      let filtered = players;
+      if (currentFilter !== 'all') {
+        filtered = players.filter(p => p.role === currentFilter);
+      }
+
+      container.innerHTML = filtered.map(player => `
+        <div class="player-card ${selectedPlayers.find(p => p.id === player.id) ? 'selected' : ''}" 
+             onclick="togglePlayer(${player.id})">
+          <div class="player-name">${player.name}</div>
+          <div class="player-role">${player.role.toUpperCase()}</div>
+          <div style="font-size: 12px; color: var(--text-light); margin-bottom: 8px;">${player.team}</div>
+          <div class="player-credit">💳 ${player.credits}</div>
+          ${selectedPlayers.find(p => p.id === player.id) ? `
+            <div style="margin-top: 10px; font-size: 12px;">
+              <button onclick="setCaptain(${player.id}, event)" class="btn btn-small" style="background: #27ae60; color: white; ${captain?.id === player.id ? 'opacity: 0.5;' : ''}">
+                ${captain?.id === player.id ? '✓ Captain' : 'Captain'}
+              </button>
+              <button onclick="setViceCaptain(${player.id}, event)" class="btn btn-small" style="background: #3498db; color: white; margin-left: 5px; ${viceCaptain?.id === player.id ? 'opacity: 0.5;' : ''}">
+                ${viceCaptain?.id === player.id ? '✓ V-Cap' : 'V-Cap'}
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    function togglePlayer(playerId) {
+      const player = allPlayers.find(p => p.id === playerId);
+      const index = selectedPlayers.findIndex(p => p.id === playerId);
+
+      if (index > -1) {
+        selectedPlayers.splice(index, 1);
+        if (captain?.id === playerId) captain = null;
+        if (viceCaptain?.id === playerId) viceCaptain = null;
+      } else {
+        if (selectedPlayers.length < 11) {
+          selectedPlayers.push(player);
+        } else {
+          showAlert('You can only select 11 players', 'error');
+          return;
+        }
+      }
+
+      updateSummary();
+      displayPlayers();
+    }
+
+    function setCaptain(playerId, event) {
+      event.stopPropagation();
+      const player = selectedPlayers.find(p => p.id === playerId);
+      if (player) {
+        captain = captain?.id === playerId ? null : player;
+        updateSummary();
+        displayPlayers();
+      }
+    }
+
+    function setViceCaptain(playerId, event) {
+      event.stopPropagation();
+      const player = selectedPlayers.find(p => p.id === playerId);
+      if (player && captain?.id !== playerId) {
+        viceCaptain = viceCaptain?.id === playerId ? null : player;
+        updateSummary();
+        displayPlayers();
+      } else if (captain?.id === playerId) {
+        showAlert('Captain cannot be vice-captain', 'error');
+      }
+    }
+
+    function updateSummary() {
+      document.getElementById('selectedCount').textContent = selectedPlayers.length;
+      document.getElementById('totalPlayers').textContent = selectedPlayers.length;
+      document.getElementById('captainDisplay').textContent = captain ? captain.name : 'Not selected';
+      document.getElementById('viceCaptainDisplay').textContent = viceCaptain ? viceCaptain.name : 'Not selected';
+    }
+
+    function filterByRole(role) {
+      currentFilter = role;
+      document.querySelectorAll('.role-filter button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      displayPlayers();
+    }
+
+    function submitTeam() {
+      const teamName = document.getElementById('teamName').value;
+
+      if (!teamName) {
+        showAlert('Please enter a team name', 'error');
+        return;
+      }
+
+      if (selectedPlayers.length !== 11) {
+        showAlert('You must select exactly 11 players', 'error');
+        return;
+      }
+
+      if (!captain) {
+        showAlert('Please select a captain', 'error');
+        return;
+      }
+
+      if (!viceCaptain) {
+        showAlert('Please select a vice-captain', 'error');
+        return;
+      }
+
+      showAlert('Team created successfully!', 'success');
+      setTimeout(() => {
+        redirectToProfile();
+      }, 1500);
+    }
+
+    // Load players on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      displayPlayers();
+    });
+  </script>
+</body>
+</html>

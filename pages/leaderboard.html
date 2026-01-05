@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard - KEMETION Fantasy Cricket</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        🏏 KEMETION
+      </a>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/contests.html">Contests</a>
+        <a href="/pages/leaderboard.html">Leaderboard</a>
+        <a href="/pages/how-to-play.html">How to Play</a>
+      </nav>
+      <div class="nav-buttons"></div>
+    </div>
+  </header>
+
+  <!-- ALERT CONTAINER -->
+  <div id="alert-container" style="position: fixed; top: 80px; right: 20px; z-index: 999; max-width: 400px;"></div>
+
+  <!-- HERO SECTION -->
+  <section style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); color: white; padding: 60px 20px; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 36px; margin-bottom: 20px;">Global Leaderboard</h1>
+      <p style="font-size: 18px; opacity: 0.9;">See how you rank against other players</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section style="padding: 40px 20px; background: var(--light-gray); min-height: 100vh;">
+    <div class="container" style="max-width: 1000px;">
+      <!-- FILTERS -->
+      <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+        <div>
+          <label style="display: block; margin-bottom: 8px; font-weight: 600;">Filter by Match:</label>
+          <select id="matchFilter" style="padding: 10px; border: 1px solid var(--border-color); border-radius: 5px;">
+            <option value="all">All Matches</option>
+            <option value="india-vs-australia">India vs Australia</option>
+            <option value="pakistan-vs-england">Pakistan vs England</option>
+            <option value="west-indies-vs-sri-lanka">West Indies vs Sri Lanka</option>
+          </select>
+        </div>
+        <div>
+          <label style="display: block; margin-bottom: 8px; font-weight: 600;">Sort by:</label>
+          <select id="sortFilter" style="padding: 10px; border: 1px solid var(--border-color); border-radius: 5px;">
+            <option value="points-desc">Points (High to Low)</option>
+            <option value="points-asc">Points (Low to High)</option>
+            <option value="name">Name (A to Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- TOP 3 PODIUM -->
+      <div class="grid grid-3" style="margin-bottom: 40px;">
+        <div id="rank-2" class="card" style="text-align: center; border: 2px solid #c0c0c0; position: relative; top: 30px;">
+          <div style="font-size: 48px; margin-bottom: 10px;">🥈</div>
+          <div style="font-size: 18px; font-weight: 700; color: var(--primary-blue); margin-bottom: 5px;">-</div>
+          <div style="color: var(--text-light); margin-bottom: 10px;">-</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--primary-orange);">-</div>
+        </div>
+
+        <div id="rank-1" class="card" style="text-align: center; border: 3px solid #ffd700;">
+          <div style="font-size: 48px; margin-bottom: 10px;">🥇</div>
+          <div style="font-size: 18px; font-weight: 700; color: var(--primary-blue); margin-bottom: 5px;">-</div>
+          <div style="color: var(--text-light); margin-bottom: 10px;">-</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--primary-orange);">-</div>
+        </div>
+
+        <div id="rank-3" class="card" style="text-align: center; border: 2px solid #cd7f32; position: relative; top: 30px;">
+          <div style="font-size: 48px; margin-bottom: 10px;">🥉</div>
+          <div style="font-size: 18px; font-weight: 700; color: var(--primary-blue); margin-bottom: 5px;">-</div>
+          <div style="color: var(--text-light); margin-bottom: 10px;">-</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--primary-orange);">-</div>
+        </div>
+      </div>
+
+      <!-- FULL LEADERBOARD TABLE -->
+      <div class="card">
+        <div class="card-header">
+          <h2 style="color: var(--primary-blue);">Complete Rankings</h2>
+        </div>
+        <div class="card-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Teams</th>
+                <th>Total Points</th>
+                <th>Avg Points/Team</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardTable">
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 40px;">Loading leaderboard...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PAGINATION -->
+      <div style="display: flex; justify-content: center; gap: 10px; margin-top: 30px;">
+        <button class="btn btn-secondary btn-small">← Previous</button>
+        <button class="btn btn-primary btn-small">1</button>
+        <button class="btn btn-secondary btn-small">2</button>
+        <button class="btn btn-secondary btn-small">3</button>
+        <button class="btn btn-secondary btn-small">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>KEMETION</h3>
+        <p style="opacity: 0.8;">100% Free Fantasy Cricket Platform</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="/pages/how-to-play.html">How to Play</a>
+        <a href="/pages/about.html">About Us</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/faq.html">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <a href="/pages/terms.html">Terms & Conditions</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/responsible-gaming.html">Responsible Gaming</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p style="opacity: 0.8;">Email: support@kemetionplay.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 KEMETION PRIVATE LIMITED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Sample leaderboard data
+    const leaderboardData = [
+      { rank: 1, name: 'CricketMaster', teams: 15, totalPoints: 1250, avgPoints: 83.3 },
+      { rank: 2, name: 'FantasyKing', teams: 12, totalPoints: 980, avgPoints: 81.7 },
+      { rank: 3, name: 'BattingQueen', teams: 18, totalPoints: 1450, avgPoints: 80.6 },
+      { rank: 4, name: 'BowlingAce', teams: 10, totalPoints: 820, avgPoints: 82 },
+      { rank: 5, name: 'TeamBuilder', teams: 14, totalPoints: 1100, avgPoints: 78.6 },
+      { rank: 6, name: 'PointsHunter', teams: 11, totalPoints: 880, avgPoints: 80 },
+      { rank: 7, name: 'StrategyPro', teams: 16, totalPoints: 1280, avgPoints: 80 },
+      { rank: 8, name: 'CricketFan', teams: 9, totalPoints: 720, avgPoints: 80 },
+      { rank: 9, name: 'GameChanger', teams: 13, totalPoints: 1040, avgPoints: 80 },
+      { rank: 10, name: 'ScoreKeeper', teams: 12, totalPoints: 960, avgPoints: 80 }
+    ];
+
+    function displayLeaderboard() {
+      const table = document.getElementById('leaderboardTable');
+      
+      table.innerHTML = leaderboardData.map(player => `
+        <tr>
+          <td style="font-weight: 700; color: var(--primary-orange);">#${player.rank}</td>
+          <td style="font-weight: 600;">${player.name}</td>
+          <td>${player.teams}</td>
+          <td style="color: var(--primary-blue); font-weight: 700;">${player.totalPoints}</td>
+          <td>${player.avgPoints.toFixed(1)}</td>
+        </tr>
+      `).join('');
+
+      // Display top 3
+      if (leaderboardData.length >= 1) {
+        const top1 = leaderboardData[0];
+        document.getElementById('rank-1').innerHTML = `
+          <div style="font-size: 48px; margin-bottom: 10px;">🥇</div>
+          <div style="font-size: 18px; font-weight: 700; color: var(--primary-blue); margin-bottom: 5px;">${top1.name}</div>
+          <div style="color: var(--text-light); margin-bottom: 10px;">${top1.teams} teams</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--primary-orange);">${top1.totalPoints} pts</div>
+        `;
+      }
+
+      if (leaderboardData.length >= 2) {
+        const top2 = leaderboardData[1];
+        document.getElementById('rank-2').innerHTML = `
+          <div style="font-size: 48px; margin-bottom: 10px;">🥈</div>
+          <div style="font-size: 18px; font-weight: 700; color: var(--primary-blue); margin-bottom: 5px;">${top2.name}</div>
+          <div style="color: var(--text-light); margin-bottom: 10px;">${top2.teams} teams</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--primary-orange);">${top2.totalPoints} pts</div>
+        `;
+      }
+
+      if (leaderboardData.length >= 3) {
+        const top3 = leaderboardData[2];
+        document.getElementById('rank-3').innerHTML = `
+          <div style="font-size: 48px; margin-bottom: 10px;">🥉</div>
+          <div style="font-size: 18px; font-weight: 700; color: var(--primary-blue); margin-bottom: 5px;">${top3.name}</div>
+          <div style="color: var(--text-light); margin-bottom: 10px;">${top3.teams} teams</div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--primary-orange);">${top3.totalPoints} pts</div>
+        `;
+      }
+    }
+
+    // Load leaderboard on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      displayLeaderboard();
+    });
+  </script>
+</body>
+</html>
