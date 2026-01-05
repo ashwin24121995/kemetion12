@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KEMETION - Fantasy Cricket Platform</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        🏏 KEMETION
+      </a>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/contests.html">Contests</a>
+        <a href="/pages/leaderboard.html">Leaderboard</a>
+        <a href="/pages/how-to-play.html">How to Play</a>
+        <a href="/pages/about.html">About</a>
+        <a href="/pages/contact.html">Contact</a>
+      </nav>
+      <div class="nav-buttons">
+        <a href="/pages/login.html" class="btn-login">Login</a>
+        <a href="/pages/signup.html" class="btn-signup">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ALERT CONTAINER -->
+  <div id="alert-container" style="position: fixed; top: 80px; right: 20px; z-index: 999; max-width: 400px;"></div>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+      <h1>Play Fantasy Cricket</h1>
+      <p>Select your dream team, compete with friends, and win amazing rewards!</p>
+      <div class="hero-buttons">
+        <a href="/pages/signup.html" class="btn btn-primary btn-large">Get Started</a>
+        <a href="/pages/how-to-play.html" class="btn btn-outline btn-large">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPLIANCE BANNER -->
+  <section style="background: #f0f0f0; padding: 20px; text-align: center; font-size: 14px;">
+    <p>
+      <strong>100% FREE Platform</strong> | No Real Money | Skill-Based Gaming | 18+ Only
+      <br>
+      <small>KEMETION PRIVATE LIMITED | CIN: U47594JH2023PTC020234</small>
+    </p>
+  </section>
+
+  <!-- LIVE MATCHES SECTION -->
+  <section style="padding: 60px 20px; background: white;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: var(--primary-blue);">
+        Live & Upcoming Matches
+      </h2>
+
+      <!-- FILTER TABS -->
+      <div style="display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="filterMatches('all')" id="filter-all">All Matches</button>
+        <button class="btn btn-secondary" onclick="filterMatches('live')" id="filter-live">Live</button>
+        <button class="btn btn-secondary" onclick="filterMatches('upcoming')" id="filter-upcoming">Upcoming</button>
+        <button class="btn btn-secondary" onclick="filterMatches('completed')" id="filter-completed">Completed</button>
+      </div>
+
+      <!-- MATCHES CONTAINER -->
+      <div id="matches-container" style="max-width: 900px; margin: 0 auto;">
+        <div class="spinner" style="margin: 40px auto;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); color: white; padding: 60px 20px;">
+    <div class="container">
+      <div class="grid grid-3">
+        <div style="text-align: center;">
+          <div style="font-size: 36px; font-weight: 700; margin-bottom: 10px;">1000+</div>
+          <div style="font-size: 16px; opacity: 0.9;">Active Players</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 36px; font-weight: 700; margin-bottom: 10px;">500+</div>
+          <div style="font-size: 16px; opacity: 0.9;">Matches Played</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 36px; font-weight: 700; margin-bottom: 10px;">100% FREE</div>
+          <div style="font-size: 16px; opacity: 0.9;">No Real Money</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section style="padding: 60px 20px; background: var(--light-gray);">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: var(--primary-blue);">
+        Why Choose KEMETION?
+      </h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div style="font-size: 40px; margin-bottom: 15px;">🎯</div>
+          <h3 style="color: var(--primary-blue); margin-bottom: 10px;">Easy to Play</h3>
+          <p>Select 11 players, set captain and vice-captain, and start playing instantly.</p>
+        </div>
+        <div class="card">
+          <div style="font-size: 40px; margin-bottom: 15px;">🏆</div>
+          <h3 style="color: var(--primary-blue); margin-bottom: 10px;">Compete & Win</h3>
+          <p>Compete with friends and other players on the leaderboard.</p>
+        </div>
+        <div class="card">
+          <div style="font-size: 40px; margin-bottom: 15px;">🔒</div>
+          <h3 style="color: var(--primary-blue); margin-bottom: 10px;">Secure & Safe</h3>
+          <p>Your data is protected with industry-standard security measures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section style="background: var(--primary-orange); color: white; padding: 60px 20px; text-align: center;">
+    <div class="container">
+      <h2 style="font-size: 32px; margin-bottom: 20px;">Ready to Play?</h2>
+      <p style="font-size: 18px; margin-bottom: 30px; opacity: 0.9;">Join thousands of cricket fans playing fantasy cricket for free!</p>
+      <a href="/pages/signup.html" class="btn btn-large" style="background: white; color: var(--primary-orange);">Sign Up Now</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>KEMETION</h3>
+        <p style="opacity: 0.8;">100% Free Fantasy Cricket Platform</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="/pages/how-to-play.html">How to Play</a>
+        <a href="/pages/about.html">About Us</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/faq.html">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <a href="/pages/terms.html">Terms & Conditions</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/responsible-gaming.html">Responsible Gaming</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p style="opacity: 0.8;">Email: support@kemetionplay.com</p>
+        <p style="opacity: 0.8;">Phone: +91 XXXX-XXXX-XX</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 KEMETION PRIVATE LIMITED. All rights reserved. | CIN: U47594JH2023PTC020234</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Sample match data
+    const sampleMatches = [
+      {
+        id: 1,
+        team1: 'India',
+        team2: 'Australia',
+        score1: '185/8',
+        score2: '150/6',
+        status: 'live',
+        time: '2026-01-05T15:30:00',
+        format: 'T20'
+      },
+      {
+        id: 2,
+        team1: 'Pakistan',
+        team2: 'England',
+        score1: '-',
+        score2: '-',
+        status: 'upcoming',
+        time: '2026-01-05T18:00:00',
+        format: 'T20'
+      },
+      {
+        id: 3,
+        team1: 'West Indies',
+        team2: 'Sri Lanka',
+        score1: '165',
+        score2: '168/5',
+        status: 'completed',
+        time: '2026-01-05T12:00:00',
+        format: 'T20'
+      },
+      {
+        id: 4,
+        team1: 'South Africa',
+        team2: 'New Zealand',
+        score1: '-',
+        score2: '-',
+        status: 'upcoming',
+        time: '2026-01-06T10:00:00',
+        format: 'ODI'
+      }
+    ];
+
+    let currentFilter = 'all';
+
+    function filterMatches(filter) {
+      currentFilter = filter;
+      displayMatches();
+
+      // Update button styles
+      document.querySelectorAll('[id^="filter-"]').forEach(btn => {
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-secondary');
+      });
+      document.getElementById(`filter-${filter}`).classList.remove('btn-secondary');
+      document.getElementById(`filter-${filter}`).classList.add('btn-primary');
+    }
+
+    function displayMatches() {
+      const container = document.getElementById('matches-container');
+      let filtered = sampleMatches;
+
+      if (currentFilter !== 'all') {
+        filtered = sampleMatches.filter(m => m.status === currentFilter);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-light);">No matches found.</p>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(match => `
+        <div class="match-card">
+          <div class="match-header">
+            <div>
+              <div class="match-title">${match.team1} vs ${match.team2}</div>
+              <div style="font-size: 12px; color: var(--text-light); margin-top: 5px;">${match.format}</div>
+            </div>
+            <span class="match-status status-${match.status}">${match.status}</span>
+          </div>
+          <div class="match-teams">
+            <div class="team-info">
+              <div class="team-name">${match.team1}</div>
+              <div class="team-score">${match.score1}</div>
+            </div>
+            <div class="team-info">
+              <div class="team-name">${match.team2}</div>
+              <div class="team-score">${match.score2}</div>
+            </div>
+          </div>
+          <div class="match-footer">
+            <span class="match-time">${formatTime(match.time)}</span>
+            ${match.status === 'upcoming' ? `
+              <a href="/pages/match.html?matchId=${match.id}" class="btn btn-primary btn-small">Create Team</a>
+            ` : match.status === 'live' ? `
+              <a href="/pages/match.html?matchId=${match.id}" class="btn btn-primary btn-small">View Teams</a>
+            ` : `
+              <a href="/pages/match.html?matchId=${match.id}" class="btn btn-secondary btn-small">View Results</a>
+            `}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Load matches on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      displayMatches();
+    });
+  </script>
+</body>
+</html>

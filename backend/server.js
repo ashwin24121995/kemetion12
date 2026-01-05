@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +13,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, '../public')));
 
 // MySQL Connection Pool - Railway Configuration
 const pool = mysql.createPool({
@@ -377,6 +381,19 @@ app.get('/api/health', (req, res) => {
     message: 'KEMETION API is running',
     timestamp: new Date().toISOString()
   });
+});
+
+// ==================== SERVE STATIC PAGES ====================
+
+// Serve index page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+// Serve page routes
+app.get('/pages/:page', (req, res) => {
+  const page = req.params.page;
+  res.sendFile(path.join(__dirname, `../public/pages/${page}.html`));
 });
 
 // ==================== ERROR HANDLING ====================

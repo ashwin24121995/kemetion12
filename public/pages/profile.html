@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - KEMETION Fantasy Cricket</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        🏏 KEMETION
+      </a>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/contests.html">Contests</a>
+        <a href="/pages/leaderboard.html">Leaderboard</a>
+        <a href="/pages/how-to-play.html">How to Play</a>
+      </nav>
+      <div class="nav-buttons"></div>
+    </div>
+  </header>
+
+  <!-- ALERT CONTAINER -->
+  <div id="alert-container" style="position: fixed; top: 80px; right: 20px; z-index: 999; max-width: 400px;"></div>
+
+  <!-- MAIN CONTENT -->
+  <section style="padding: 40px 20px; background: var(--light-gray); min-height: 100vh;">
+    <div class="container" style="max-width: 1000px;">
+      <!-- PROFILE HEADER -->
+      <div class="card" style="margin-bottom: 30px;">
+        <div class="flex-between" style="flex-wrap: wrap; gap: 20px;">
+          <div>
+            <h1 id="username" style="color: var(--primary-blue); font-size: 28px; margin-bottom: 10px;">User Profile</h1>
+            <p id="email" style="color: var(--text-light);">Loading...</p>
+            <p id="joinDate" style="color: var(--text-light); font-size: 14px; margin-top: 5px;"></p>
+          </div>
+          <div style="text-align: right;">
+            <div style="margin-bottom: 15px;">
+              <p style="color: var(--text-light); font-size: 12px; margin-bottom: 5px;">Total Points</p>
+              <p style="font-size: 32px; font-weight: 700; color: var(--primary-orange);">0</p>
+            </div>
+            <button onclick="logout()" class="btn btn-secondary btn-small">Logout</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS GRID -->
+      <div class="grid grid-3" style="margin-bottom: 30px;">
+        <div class="card">
+          <div style="text-align: center;">
+            <div style="font-size: 32px; font-weight: 700; color: var(--primary-orange); margin-bottom: 10px;">
+              <span id="teamsCount">0</span>
+            </div>
+            <div style="color: var(--text-light);">Teams Created</div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="text-align: center;">
+            <div style="font-size: 32px; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px;">
+              <span id="matchesCount">0</span>
+            </div>
+            <div style="color: var(--text-light);">Matches Played</div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="text-align: center;">
+            <div style="font-size: 32px; font-weight: 700; color: var(--success-green); margin-bottom: 10px;">
+              <span id="rankCount">-</span>
+            </div>
+            <div style="color: var(--text-light);">Current Rank</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color);">
+        <button onclick="switchTab('teams')" id="tab-teams" class="btn" style="background: none; border: none; padding: 15px 0; border-bottom: 3px solid var(--primary-orange); color: var(--primary-blue); font-weight: 600;">
+          My Teams
+        </button>
+        <button onclick="switchTab('settings')" id="tab-settings" class="btn" style="background: none; border: none; padding: 15px 0; border-bottom: 3px solid transparent; color: var(--text-light); font-weight: 600;">
+          Settings
+        </button>
+      </div>
+
+      <!-- TEAMS TAB -->
+      <div id="teams-tab" class="tab-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2 style="color: var(--primary-blue);">My Teams</h2>
+          <a href="/pages/match.html" class="btn btn-primary btn-small">Create New Team</a>
+        </div>
+
+        <div id="teamsContainer">
+          <div style="text-align: center; padding: 40px; color: var(--text-light);">
+            <p>No teams created yet. <a href="/pages/match.html" style="color: var(--primary-orange); text-decoration: none;">Create your first team</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS TAB -->
+      <div id="settings-tab" class="tab-content" style="display: none;">
+        <h2 style="color: var(--primary-blue); margin-bottom: 20px;">Account Settings</h2>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-header">
+            <h3 style="color: var(--primary-blue);">Change Password</h3>
+          </div>
+          <div class="card-body">
+            <form id="passwordForm">
+              <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" id="currentPassword" placeholder="Enter current password" required>
+              </div>
+              <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword" placeholder="Enter new password" required>
+              </div>
+              <div class="form-group">
+                <label for="confirmNewPassword">Confirm New Password</label>
+                <input type="password" id="confirmNewPassword" placeholder="Confirm new password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Update Password</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 style="color: var(--primary-blue);">Danger Zone</h3>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--text-light); margin-bottom: 15px;">Deleting your account is permanent and cannot be undone.</p>
+            <button onclick="deleteAccount()" class="btn" style="background: var(--error-red); color: white;">Delete Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>KEMETION</h3>
+        <p style="opacity: 0.8;">100% Free Fantasy Cricket Platform</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="/pages/how-to-play.html">How to Play</a>
+        <a href="/pages/about.html">About Us</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/faq.html">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <a href="/pages/terms.html">Terms & Conditions</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/responsible-gaming.html">Responsible Gaming</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p style="opacity: 0.8;">Email: support@kemetionplay.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 KEMETION PRIVATE LIMITED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Sample user data
+    const sampleTeams = [
+      { id: 1, name: 'Dream XI', match: 'India vs Australia', status: 'live', points: 85 },
+      { id: 2, name: 'Super Squad', match: 'Pakistan vs England', status: 'upcoming', points: 0 },
+      { id: 3, name: 'Winners', match: 'West Indies vs Sri Lanka', status: 'completed', points: 92 }
+    ];
+
+    function switchTab(tab) {
+      // Hide all tabs
+      document.getElementById('teams-tab').style.display = 'none';
+      document.getElementById('settings-tab').style.display = 'none';
+
+      // Remove active state from all buttons
+      document.getElementById('tab-teams').style.borderBottomColor = 'transparent';
+      document.getElementById('tab-teams').style.color = 'var(--text-light)';
+      document.getElementById('tab-settings').style.borderBottomColor = 'transparent';
+      document.getElementById('tab-settings').style.color = 'var(--text-light)';
+
+      // Show selected tab
+      document.getElementById(tab + '-tab').style.display = 'block';
+      document.getElementById('tab-' + tab).style.borderBottomColor = 'var(--primary-orange)';
+      document.getElementById('tab-' + tab).style.color = 'var(--primary-blue)';
+    }
+
+    function displayTeams() {
+      const container = document.getElementById('teamsContainer');
+      
+      if (sampleTeams.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-light);"><p>No teams created yet.</p></div>';
+        return;
+      }
+
+      container.innerHTML = sampleTeams.map(team => `
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="flex-between" style="flex-wrap: wrap; gap: 20px;">
+            <div>
+              <h3 style="color: var(--primary-blue); margin-bottom: 5px;">${team.name}</h3>
+              <p style="color: var(--text-light); font-size: 14px;">${team.match}</p>
+              <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">
+                Status: <span style="color: var(--primary-orange); font-weight: 600;">${team.status.toUpperCase()}</span>
+              </p>
+            </div>
+            <div style="text-align: right;">
+              <p style="color: var(--text-light); font-size: 12px; margin-bottom: 5px;">Points</p>
+              <p style="font-size: 24px; font-weight: 700; color: var(--primary-orange);">${team.points}</p>
+              <a href="#" class="btn btn-secondary btn-small" style="margin-top: 10px;">View Details</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('teamsCount').textContent = sampleTeams.length;
+    }
+
+    function loadUserProfile() {
+      const userData = getUserData();
+      if (userData) {
+        document.getElementById('username').textContent = userData.username;
+        document.getElementById('email').textContent = userData.email;
+        document.getElementById('joinDate').textContent = 'Member since ' + formatDate(new Date());
+      }
+    }
+
+    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmNewPassword').value;
+
+      if (newPassword !== confirmPassword) {
+        showAlert('Passwords do not match', 'error');
+        return;
+      }
+
+      if (!validatePassword(newPassword)) {
+        showAlert('Password must be at least 6 characters', 'error');
+        return;
+      }
+
+      showAlert('Password updated successfully', 'success');
+      this.reset();
+    });
+
+    function deleteAccount() {
+      if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        if (confirm('This will permanently delete all your data. Are you absolutely sure?')) {
+          logout();
+        }
+      }
+    }
+
+    // Load profile on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadUserProfile();
+      displayTeams();
+    });
+  </script>
+</body>
+</html>

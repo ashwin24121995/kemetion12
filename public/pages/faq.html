@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - KEMETION Fantasy Cricket</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .faq-item {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--light-gray);
+      transition: background 0.3s ease;
+      font-weight: 600;
+      color: var(--primary-blue);
+    }
+
+    .faq-question:hover {
+      background: #efefef;
+    }
+
+    .faq-toggle {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 20px;
+      max-height: 500px;
+    }
+
+    .faq-answer p {
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">
+        🏏 KEMETION
+      </a>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/contests.html">Contests</a>
+        <a href="/pages/leaderboard.html">Leaderboard</a>
+        <a href="/pages/how-to-play.html">How to Play</a>
+      </nav>
+      <div class="nav-buttons"></div>
+    </div>
+  </header>
+
+  <!-- ALERT CONTAINER -->
+  <div id="alert-container" style="position: fixed; top: 80px; right: 20px; z-index: 999; max-width: 400px;"></div>
+
+  <!-- HERO SECTION -->
+  <section style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%); color: white; padding: 60px 20px; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 36px; margin-bottom: 20px;">Frequently Asked Questions</h1>
+      <p style="font-size: 18px; opacity: 0.9;">Find answers to common questions about KEMETION</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section style="padding: 60px 20px; background: var(--light-gray); min-height: 100vh;">
+    <div class="container" style="max-width: 900px;">
+      <!-- GENERAL QUESTIONS -->
+      <div style="margin-bottom: 40px;">
+        <h2 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 24px;">General Questions</h2>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>What is KEMETION?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>KEMETION is a 100% free fantasy cricket platform where you can create teams, compete with other players, and test your cricket knowledge. No real money is involved - it's purely skill-based gaming.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>Is KEMETION really free?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, KEMETION is 100% free. There are no hidden charges, subscription fees, or real money involved. You can create unlimited teams and participate in all contests completely free.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>Who can play on KEMETION?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Anyone who is 18 years or older can play on KEMETION. You need to create an account with a valid email address to get started.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>How do I create an account?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Creating an account is simple! Click on the "Sign Up" button, enter your username, email, and password. Once verified, you can start creating teams immediately.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAMEPLAY QUESTIONS -->
+      <div style="margin-bottom: 40px;">
+        <h2 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 24px;">Gameplay Questions</h2>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>How many players should I select in my team?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>You must select exactly 11 players for your team. This includes 1 captain, 1 vice-captain, and 9 other players. You can select players from both teams playing in the match.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>What's the difference between Captain and Vice-Captain?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Your captain's points are multiplied by 1.5x, while your vice-captain's points are multiplied by 1.25x. Choosing the right captain and vice-captain is crucial for maximizing your team's score.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>Can I change my team after the match starts?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>No, your team is locked once the match starts. You cannot make any changes after the match begins. Make sure to finalize your team before the match starts.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>How are points calculated?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Points are calculated based on real-time performance of your selected players in the match. Batsmen earn points for runs, bowlers for wickets, and fielders for catches. Check our "How to Play" page for the complete scoring system.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>Can I create multiple teams for the same match?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, you can create multiple teams for the same match and join different contests with each team. This allows you to experiment with different strategies.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCOUNT QUESTIONS -->
+      <div style="margin-bottom: 40px;">
+        <h2 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 24px;">Account Questions</h2>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>How do I reset my password?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Click on "Forgot Password" on the login page and enter your email address. We'll send you a link to reset your password. Follow the instructions in the email to create a new password.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>Is my personal information safe?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, your personal information is protected with industry-standard security measures. We use encryption and follow strict data protection protocols. Check our Privacy Policy for more details.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-question">
+            <span>Can I delete my account?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, you can delete your account from your profile settings. Note that this action is permanent and cannot be undone. All your data will be deleted.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="card" style="background: var(--primary-orange); color: white; text-align: center;">
+        <div class="card-body">
+          <h2 style="color: white; margin-bottom: 15px;">Still have questions?</h2>
+          <p style="margin-bottom: 20px; opacity: 0.9;">Contact our support team for more help.</p>
+          <a href="/pages/contact.html" class="btn btn-large" style="background: white; color: var(--primary-orange);">Contact Support</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>KEMETION</h3>
+        <p style="opacity: 0.8;">100% Free Fantasy Cricket Platform</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="/pages/how-to-play.html">How to Play</a>
+        <a href="/pages/about.html">About Us</a>
+        <a href="/pages/contact.html">Contact</a>
+        <a href="/pages/faq.html">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <a href="/pages/terms.html">Terms & Conditions</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/responsible-gaming.html">Responsible Gaming</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p style="opacity: 0.8;">Email: support@kemetionplay.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 KEMETION PRIVATE LIMITED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function toggleFAQ(element) {
+      element.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
